@@ -8,6 +8,27 @@ This repository contains the ZMK firmware configuration for the Kinesis Advantag
 - **Main Branch**: `V3.0` (for pull requests)
 - **Keyboard Type**: Split ergonomic keyboard with pointing device support
 
+## ⚠️ IMPORTANT: Key Position Reference
+
+**ALWAYS refer to `assets/key-positions.md` for precise key mapping!**
+
+This file contains the definitive key position mappings for the Advantage 360 Pro:
+
+- **Visual Reference**: `assets/key-positions.png` - Visual diagram of all key positions
+- **Code Definitions**: `assets/key-positions.md` - Numerical position mappings
+
+### Key Position Ranges:
+- **Left Main Keys**: `0-6, 14-20, 28-34, 46-51, 60-64`
+- **Right Main Keys**: `7-13, 21-27, 39-45, 54-59, 71-75`
+- **Left Thumb Cluster**: `35-36, 52, 65-67`
+- **Right Thumb Cluster**: `37-38, 53, 68-70`
+
+### Homerow Positions:
+- **Left Homerow**: `28=A, 29=S, 30=D, 31=F`
+- **Right Homerow**: `42=J, 43=K, 44=L, 45=;`
+
+**When discussing specific keys, always reference these position numbers or the visual diagram to avoid confusion.**
+
 ## Key Configuration Files
 
 ### Primary Keymap

@@ -1,0 +1,100 @@
+#!/bin/bash
+
+# Show help
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    cat << 'EOF' | glow -
+# 🔨 Build Script Help
+
+Build firmware for the Advantage 360 Pro keyboard and display flashing instructions.
+
+## Usage
+
+```bash
+./bin/build [OPTIONS]
+```
+
+## Options
+
+- **No arguments**: Build firmware and show flashing instructions
+- `--print-only`, `--print`: Skip build, show instructions for existing firmware
+- `--help`, `-h`: Show this help message
+
+## Examples
+
+```bash
+# Build firmware and show instructions
+./bin/build
+
+# Just show flashing instructions for existing firmware
+./bin/build --print
+
+# Show help
+./bin/build --help
+```
+EOF
+    exit 0
+fi
+
+# Check for --print-only or --print flag
+if [ "$1" = "--print-only" ] || [ "$1" = "--print" ]; then
+    PRINT_ONLY=true
+    echo "Skipping build, showing instructions only..."
+else
+    PRINT_ONLY=false
+    # Build firmware for Advantage 360 Pro
+    echo "Building firmware..."
+    
+    # Time the make process
+    START_TIME=$(date +%s)
+    time make
+    BUILD_EXIT_CODE=$?
+    END_TIME=$(date +%s)
+    BUILD_DURATION=$((END_TIME - START_TIME))
+fi
+
+# Check if build was successful or if we're just printing
+if [ "$PRINT_ONLY" = true ] || [ "$BUILD_EXIT_CODE" -eq 0 ]; then
+    echo
+    if [ "$PRINT_ONLY" = true ]; then
+        echo "Showing flashing instructions..."
+    else
+        echo "Build completed successfully!"
+    fi
+    echo
+    
+    # Get the most recent firmware files
+    LEFT_FIRMWARE=$(ls -t firmware/*left*.uf2 2>/dev/null | head -1)
+    RIGHT_FIRMWARE=$(ls -t firmware/*right*.uf2 2>/dev/null | head -1)
+    
+    # Create markdown instructions and pipe to glow
+    cat << EOF | glow -
+# 🔧 Flashing Instructions
+
+## Recent Firmware Files
+- **Left**: \`${LEFT_FIRMWARE:-"No left firmware found"}\`
+- **Right**: \`${RIGHT_FIRMWARE:-"No right firmware found"}\`
+
+## Flashing Steps
+
+1. Connect the left side keyboard to USB.
+2. Press **Mod+macro1** to put the left side into bootloader mode; it should attach to your computer as a USB drive.
+3. Copy \`${LEFT_FIRMWARE##*/}\` to the USB drive and it will disconnect.
+4. Power off both keyboards (by unplugging them and making sure the switches are off).
+5. Turn on the left side keyboard with the switch.
+6. Connect the right side keyboard to USB to power it on.
+7. Press **Mod+macro3** to put the right side into bootloader mode to attach it as a USB drive.
+8. Copy \`${RIGHT_FIRMWARE##*/}\` to the mounted drive.
+9. Unplug the right side keyboard and turn it back on.
+10. Enjoy!
+EOF
+
+    # Show build time if we actually built
+    if [ "$PRINT_ONLY" = false ]; then
+        echo
+        echo "⏱️  Docker build completed in ${BUILD_DURATION} seconds"
+    fi
+
+else
+    echo "Build failed!"
+    exit 1
+fi
