@@ -51,6 +51,7 @@
     compatible = "zmk,keymap";
 
     #include "layers/default.dtsi"
+    #include "layers/navigation.dtsi"
     #include "layers/keypad.dtsi"
     #include "layers/function.dtsi"
     #include "layers/mod.dtsi"
