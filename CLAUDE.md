@@ -105,6 +105,28 @@ make clean     # Clean all build artifacts
 - **Layer 2**: `&mo 2` (momentary function)
 - **Layer 3**: `&mo 3` (momentary mod)
 
+## Planned Features
+
+### Symbol Layer (Position 28)
+**Concept**: Use position 28 (currently unmapped) as hold key for dedicated symbol layer
+
+**Rationale**: 
+- Kinesis 1.5U keycaps on positions 0 and 13 prevent traditional `` ` 1 2 3 4 5 6 7 8 9 0 - = `` layout
+- Current Kp/Mod keys in number row are functional but break symbol muscle memory
+- Symbol layer would provide perfect symbol placement without keycap constraints
+
+**Implementation Plan**:
+- **Hold Key**: Position 28 (strong left pinky position, matches old Caps→Ctrl mapping)
+- **Target Keys**: Right-hand uiopjkl; positions for symbol placement
+- **Ergonomics**: Hold left pinky, type symbols with right hand (natural modifier behavior)
+- **Symbols**: All programming symbols (`` ` - = ; ' [ ] , . / \ | ``) positioned optimally
+
+**Benefits**:
+- Unlimited symbol layout flexibility
+- Proper ergonomics (hold left, type right)
+- Solves keycap size constraints
+- Maintains familiar modifier key muscle memory
+
 ## Common Customization Tasks
 
 ### Adding New Macros

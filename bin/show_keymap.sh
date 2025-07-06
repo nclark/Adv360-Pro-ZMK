@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 # Generate and display keymap visualization
 # Note: `pip install keymap-drawer`
@@ -11,4 +11,6 @@ SVG_FILE="$TMP_DIR/keymap.svg"
 
 keymap parse -z "$KEYMAP_FILE" | keymap draw - > "$SVG_FILE"
 
-open -a "Chromium" "$SVG_FILE"
+# open -a "Chromium" "$SVG_FILE"
+# timg -W 200 "$SVG_FILE"
+echo $SVG_FILE
