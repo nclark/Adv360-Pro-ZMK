@@ -5,7 +5,21 @@
       "mcp__context7__resolve-library-id",
       "mcp__context7__get-library-docs",
       "mcp__filesystem__read_multiple_files",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(keymap:*)",
+      "Bash(mkdir:*)",
+      "Bash(go mod init:*)",
+      "Bash(cd:*)",
+      "Bash(cd:*)",
+      "Bash(go run:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(chmod:*)",
+      "Bash(timeout:*)",
+      "Bash(./build.sh)",
+      "Bash(timg:*)",
+      "Bash(go get:*)"
     ],
     "deny": []
   }
