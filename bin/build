@@ -43,13 +43,16 @@ else
     PRINT_ONLY=false
     # Build firmware for Advantage 360 Pro
     echo "Building firmware..."
-    
+
     # Time the make process
     START_TIME=$(date +%s)
     time make
     BUILD_EXIT_CODE=$?
     END_TIME=$(date +%s)
     BUILD_DURATION=$((END_TIME - START_TIME))
+
+    echo "Generating layer images..."
+    "${PWD}/bin/generate_layer_images.sh"
 fi
 
 # Check if build was successful or if we're just printing
@@ -61,11 +64,11 @@ if [ "$PRINT_ONLY" = true ] || [ "$BUILD_EXIT_CODE" -eq 0 ]; then
         echo "Build completed successfully!"
     fi
     echo
-    
+
     # Get the most recent firmware files
     LEFT_FIRMWARE=$(ls -t firmware/*left*.uf2 2>/dev/null | head -1)
     RIGHT_FIRMWARE=$(ls -t firmware/*right*.uf2 2>/dev/null | head -1)
-    
+
     # Create markdown instructions and pipe to glow
     cat << EOF | glow -
 # 🔧 Flashing Instructions

@@ -1,5 +1,5 @@
 navigation {
-  display-name = "Nav";
+  display-name = "navigation";
   bindings = <
     &trans &trans &trans &trans &trans &trans &trans                                                           &trans &trans &trans &trans &trans &trans &trans
     &trans &trans &trans &trans &trans &trans &trans                                                           &trans &trans &trans &trans &trans &trans &trans
