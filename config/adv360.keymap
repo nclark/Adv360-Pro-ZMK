@@ -45,6 +45,25 @@
           hold-trigger-on-release;
           bindings = <&kp>, <&kp>;
       };
+
+      // Shift with caps word on tap
+      shift_caps_l: shift_caps_left {
+          compatible = "zmk,behavior-hold-tap";
+          label = "SHIFT_CAPS_LEFT";
+          #binding-cells = <2>;
+          tapping-term-ms = <300>;
+          flavor = "hold-preferred";
+          bindings = <&kp>, <&caps_word>;
+      };
+
+      shift_caps_r: shift_caps_right {
+          compatible = "zmk,behavior-hold-tap";
+          label = "SHIFT_CAPS_RIGHT";
+          #binding-cells = <2>;
+          tapping-term-ms = <300>;
+          flavor = "hold-preferred";
+          bindings = <&kp>, <&caps_word>;
+      };
     };
 
   keymap {
