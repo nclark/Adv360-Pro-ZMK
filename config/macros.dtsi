@@ -34,6 +34,22 @@
     #binding-cells = <0>;
     bindings = <&kp LS(K)>, <&kp I>, <&kp N>, <&kp E>, <&kp S>, <&kp I>, <&kp S>;
   };
+  
+  voice_type: voice_type {
+    compatible = "zmk,behavior-macro";
+    label = "voice_type";
+    #binding-cells = <0>;
+    bindings = <&kp RC(RS(RG(V)))>;
+    display-name = "VoiceType Trigger";
+  };
+  
+  mac_accessibility: mac_accessibility {
+    compatible = "zmk,behavior-macro";
+    label = "mac_accessibility";
+    #binding-cells = <0>;
+    bindings = <&kp LG(LA(F5))>;
+    display-name = "Mac Accessibility";
+  };
   Win_Cut: Windows_Cut {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
