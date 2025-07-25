@@ -5,6 +5,7 @@
 #include <dt-bindings/zmk/stp.h>
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <behaviors/num_word.dtsi>
 
 // Key position definitions for homerow mods
 #define KEYS_L 0 1 2 3 4 5 6 14 15 16 17 18 19 20 28 29 30 31 32 33 34 46 47 48 49 50 51 60 61 62 63 64   // Left side keys  
@@ -47,22 +48,31 @@
       };
 
       // Shift with caps word on tap
-      shift_caps_l: shift_caps_left {
+      shift_const_l: shift_const_left {
           compatible = "zmk,behavior-hold-tap";
-          label = "SHIFT_CAPS_LEFT";
+          label = "SHIFT_CONST_LEFT";
           #binding-cells = <2>;
           tapping-term-ms = <300>;
           flavor = "hold-preferred";
-          bindings = <&kp>, <&caps_word>;
+          bindings = <&kp>, <&const_word>;
       };
 
-      shift_caps_r: shift_caps_right {
+      shift_const_r: shift_const_right {
           compatible = "zmk,behavior-hold-tap";
-          label = "SHIFT_CAPS_RIGHT";
+          label = "SHIFT_CONST_RIGHT";
           #binding-cells = <2>;
           tapping-term-ms = <300>;
           flavor = "hold-preferred";
-          bindings = <&kp>, <&caps_word>;
+          bindings = <&kp>, <&const_word>;
+      };
+
+      // Custom auto-layer for constants with symbols
+      const_word: const_word {
+          compatible = "zmk,behavior-auto-layer";
+          #binding-cells = <1>;
+          continue-list = <UNDERSCORE MINUS BACKSPACE DELETE>;
+          ignore-alphas;
+          ignore-numbers;
       };
     };
 
@@ -74,6 +84,7 @@
     #include "layers/keypad.dtsi"
     #include "layers/function.dtsi"
     #include "layers/mod.dtsi"
+    #include "layers/constant.dtsi"
     extra1 { 
       display-name = "Red";    
       status = "reserved";
