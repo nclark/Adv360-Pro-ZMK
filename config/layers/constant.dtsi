@@ -3,8 +3,8 @@ constant_layer {
   bindings = <
     &kp LS(EQUAL) &kp EXCL    &kp AT   &kp HASH &kp DOLLAR &kp PERCENT &trans                                                       &trans &kp CARET &kp AMPS &kp STAR  &kp LPAR &kp RPAR &kp UNDERSCORE
     &trans        &kp LS(Q)   &kp LS(W) &kp LS(E) &kp LS(R) &kp LS(T)  &trans                                                      &trans &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P) &kp PIPE
-    &trans        &kp LS(A)   &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)  &trans        &trans    &trans   &trans    &trans             &trans &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp COLON &trans
+    &trans        &kp LS(A)   &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G)  &trans        &trans    &trans   &trans    &trans             &trans &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp COLON &kp LS(SQT)
     &trans        &kp LS(Z)   &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B)                        &trans &trans                               &kp LS(N) &kp LS(M) &kp LT    &kp GT    &kp QMARK &trans
-    &trans        &trans      &trans    &trans    &trans                  &kp BSPC &trans &trans  &trans &trans &kp SPACE              &trans    &trans    &trans    &trans    &trans
+    &trans        &kp LS(GRAVE) &trans    &trans    &trans                  &kp BSPC &trans &trans  &trans &trans &kp SPACE              &trans    &trans    &kp LS(LBKT) &kp LS(RBKT) &trans
   >;
 };
