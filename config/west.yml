@@ -13,6 +13,6 @@ manifest:
       import: app/west.yml
     - name: zmk-auto-layer
       remote: urob
-      revision: main
+      revision: b31aa0a357343535a56d535edd0c2ad64d3d7230
   self:
     path: config

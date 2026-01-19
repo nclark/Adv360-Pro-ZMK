@@ -74,6 +74,15 @@
           ignore-alphas;
           ignore-numbers;
       };
+
+      // Tap-dance for VoiceInk (single tap) and VoiceInk History (double tap)
+      voiceink_double: voiceink_double {
+          compatible = "zmk,behavior-tap-dance";
+          label = "VOICEINK_DOUBLE";
+          #binding-cells = <0>;
+          tapping-term-ms = <200>;
+          bindings = <&voiceink>, <&voiceink_history>;
+      };
     };
 
   keymap {

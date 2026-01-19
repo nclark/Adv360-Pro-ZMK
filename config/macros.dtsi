@@ -43,6 +43,22 @@
     display-name = "Voice Control";
   };
 
+  voiceink: voiceink {
+    compatible = "zmk,behavior-macro";
+    label = "voiceink";
+    #binding-cells = <0>;
+    bindings = <&kp LC(LS(LG(V)))>;
+    display-name = "VoiceInk";
+  };
+
+  voiceink_history: voiceink_history {
+    compatible = "zmk,behavior-macro";
+    label = "voiceink_history";
+    #binding-cells = <0>;
+    bindings = <&kp LC(LG(V))>;
+    display-name = "VoiceInk History";
+  };
+
   dictation: dictation {
     compatible = "zmk,behavior-macro";
     label = "dictation";
