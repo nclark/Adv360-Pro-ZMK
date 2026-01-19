@@ -76,12 +76,23 @@
       };
 
       // Tap-dance for VoiceInk (single tap) and VoiceInk History (double tap)
-      voiceink_double: voiceink_double {
+      voiceink_td: voiceink_td {
           compatible = "zmk,behavior-tap-dance";
-          label = "VOICEINK_DOUBLE";
+          label = "VOICEINK_TD";
           #binding-cells = <0>;
           tapping-term-ms = <200>;
           bindings = <&voiceink>, <&voiceink_history>;
+      };
+
+      // Hold-tap: hold for push-to-talk, tap for tap-dance
+      voiceink_all: voiceink_all {
+          compatible = "zmk,behavior-hold-tap";
+          label = "VOICEINK_ALL";
+          #binding-cells = <2>;
+          tapping-term-ms = <300>;
+          quick-tap-ms = <200>;
+          flavor = "tap-preferred";
+          bindings = <&voiceink_hold>, <&voiceink_td>;
       };
     };
 

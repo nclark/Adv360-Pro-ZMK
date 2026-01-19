@@ -51,6 +51,17 @@
     display-name = "VoiceInk";
   };
 
+  voiceink_hold: voiceink_hold {
+    compatible = "zmk,behavior-macro";
+    label = "voiceink_hold";
+    #binding-cells = <0>;
+    bindings =
+        <&macro_press &kp LCTRL &kp LSHFT &kp LGUI &kp V>,
+        <&macro_pause_for_release>,
+        <&macro_release &kp V &kp LGUI &kp LSHFT &kp LCTRL>;
+    display-name = "VoiceInk Hold";
+  };
+
   voiceink_history: voiceink_history {
     compatible = "zmk,behavior-macro";
     label = "voiceink_history";
