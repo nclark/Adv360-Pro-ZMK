@@ -5,6 +5,6 @@ default_layer {
     &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &kp C_VOL_UP                                                     &kp C_MUTE &kp Y  &kp U  &kp I     &kp O    &kp P    &kp MINUS
     &kp ESC   &hm_l LALT A  &hm_l LCTRL S  &hm_l LGUI D  &hm_l LSHFT F  &kp G  &kp C_VOL_DN        &none          &none    &none     &voicectrl             &kp C_PP &kp H  &hm_r RSHFT J  &hm_r RGUI K  &hm_r RCTRL L  &hm_r RALT SEMI &kp SQT
     &shift_const_l LSHFT 5 &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH &kp BSLH
-    &mo 3     &kp GRAVE &kp PSCRN    &kp LEFT &kp RIGHT                   &kp BSPC &voiceink_all 0 0 &kp END  &kp PG_DN &kp ENTER &kp SPACE              &kp DOWN  &kp UP     &kp LBKT &kp RBKT &mo 3
+    &voiceink_all 0 0     &kp GRAVE &kp PSCRN    &kp LEFT &kp RIGHT                   &kp BSPC &voiceink_all 0 0 &kp END  &kp PG_DN &kp ENTER &kp SPACE              &kp DOWN  &kp UP     &kp LBKT &kp RBKT &mo 3
   >;
 };
