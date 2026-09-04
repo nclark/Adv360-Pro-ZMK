@@ -33,9 +33,9 @@ THUMBS = {
 
 
 # Stock Kinesis keycap legends for the six inner-column keys. Kinesis docs refer to
-# these ("Mod + Hotkey 1 = left bootloader"), so show them as a corner badge on every
-# layer. Verified against the user manual: Hotkey 1/3 = bootloader L/R (pos 20/21),
-# Hotkey 4 = battery (pos 39).
+# these ("Mod + Hotkey 1 = left bootloader"), so show them as a corner badge on the
+# mod layer and the positions panel. Verified against the user manual: Hotkey 1/3 =
+# bootloader L/R (pos 20/21), Hotkey 4 = battery (pos 39).
 STOCK_CAPS = {6: "Kp", 7: "Mod", 20: "①", 34: "②", 21: "③", 39: "④"}
 
 
@@ -302,7 +302,8 @@ def render_board(geo, layers, idx, legend):
         if r:
             style += f";transform:rotate({r}deg)"
         hold_div = f'<div class="hold">{html.escape(hold)}</div>' if hold else ""
-        cap = f'<div class="cap">{STOCK_CAPS[pos]}</div>' if pos in STOCK_CAPS else ""
+        cap = (f'<div class="cap">{STOCK_CAPS[pos]}</div>'
+               if pos in STOCK_CAPS and layers[idx][0] == "mod" else "")
         codes = " ".join(jscodes(src))
         keys.append(f'<div class="{cls}" data-pos="{pos}" data-codes="{codes}" '
                     f'style="{style}" title="{html.escape(" ".join(b))}">{cap}'
