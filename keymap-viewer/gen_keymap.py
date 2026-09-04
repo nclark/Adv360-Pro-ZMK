@@ -32,6 +32,13 @@ THUMBS = {
 }
 
 
+# Stock Kinesis keycap legends for the six inner-column keys. Kinesis docs refer to
+# these ("Mod + Hotkey 1 = left bootloader"), so show them as a corner badge on every
+# layer. Verified against the user manual: Hotkey 1/3 = bootloader L/R (pos 20/21),
+# Hotkey 4 = battery (pos 39).
+STOCK_CAPS = {6: "Kp", 7: "Mod", 20: "①", 34: "②", 21: "③", 39: "④"}
+
+
 def load_geometry():
     """-> list indexed by ZMK position 0..75 of (x, y, w, h, rotation_deg).
     Main keys come from config/info.json (listed in position order); rotation
@@ -295,9 +302,10 @@ def render_board(geo, layers, idx, legend):
         if r:
             style += f";transform:rotate({r}deg)"
         hold_div = f'<div class="hold">{html.escape(hold)}</div>' if hold else ""
+        cap = f'<div class="cap">{STOCK_CAPS[pos]}</div>' if pos in STOCK_CAPS else ""
         codes = " ".join(jscodes(src))
         keys.append(f'<div class="{cls}" data-pos="{pos}" data-codes="{codes}" '
-                    f'style="{style}" title="{html.escape(" ".join(b))}">'
+                    f'style="{style}" title="{html.escape(" ".join(b))}">{cap}'
                     f'<div class="tap">{html.escape(tap)}</div>{hold_div}</div>')
     return f'<div class="board">{"".join(keys)}</div>'
 
@@ -312,7 +320,8 @@ def render_positions(geo, layers, legend):
                  f"height:{h*U-6:.0f}px")
         if r:
             style += f";transform:rotate({r}deg)"
-        keys.append(f'<div class="key posn" data-pos="{pos}" style="{style}">'
+        cap = f'<div class="cap">{STOCK_CAPS[pos]}</div>' if pos in STOCK_CAPS else ""
+        keys.append(f'<div class="key posn" data-pos="{pos}" style="{style}">{cap}'
                     f'<div class="tap">{pos}</div>'
                     f'<div class="hold">{html.escape(tap)}</div></div>')
     return f'<div class="board">{"".join(keys)}</div>'
@@ -374,10 +383,13 @@ def main():
           overflow:hidden; }}
   .tap {{ font-size:15px; line-height:1.1; }}
   .hold {{ font-size:10px; color:#7fb069; }}
+  .cap {{ position:absolute; top:1px; right:4px; font-size:10px; color:#8a6d2f; }}
+  .dead .cap, .ghost .cap {{ color:#c9a45c; }}
   .ghost {{ opacity:.32; }}
   .active {{ background:#24313f; border-color:#3e5871; }}
   .active .tap {{ color:#8ecbff; }}
   .dead {{ opacity:.28; }}
+  .dead:has(.cap) {{ opacity:.6; }}
   .held {{ background:#3a2f1d; border-color:#8a6d2f; opacity:1; }}
   .held .tap {{ color:#e8b750; font-size:11px; }}
   .posn .tap {{ color:#e8b750; font-size:16px; font-weight:600; }}
