@@ -9,9 +9,9 @@ SELINUX1 := :z
 SELINUX2 := ,z
 endif
 
-.PHONY: all left clean_firmware clean_image clean
+.PHONY: all left keymap clean_firmware clean_image clean
 
-all:
+all: keymap
 	$(shell bin/get_version_local.sh clique >> /dev/null)
 	$(DOCKER) build --tag zmk --file Dockerfile .
 	$(DOCKER) run --rm -it --name zmk \
@@ -23,7 +23,7 @@ all:
 		zmk
 	git checkout config/version.dtsi
 
-left:
+left: keymap
 	$(shell bin/get_version_local.sh clique >> /dev/null)
 	$(DOCKER) build --tag zmk --file Dockerfile .
 	$(DOCKER) run --rm -it --name zmk \
@@ -34,6 +34,9 @@ left:
 		-e BUILD_RIGHT=false \
 		zmk
 	git checkout config/version.dtsi
+
+keymap:
+	python3 keymap-viewer/gen_keymap.py
 
 clean_firmware:
 	rm -f firmware/*.uf2

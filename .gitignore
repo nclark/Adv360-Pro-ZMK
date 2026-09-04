@@ -4,3 +4,5 @@
 img/*
 kmviewer/kmviewer
 kmviewer/CLAUDE.md
+keymap-viewer/keymap.html
+keymap-viewer/__pycache__/

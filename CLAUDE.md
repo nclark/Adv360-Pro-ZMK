@@ -199,3 +199,27 @@ config/
 - **ZMK Documentation**: https://zmk.dev/docs
 - **Kinesis GUI Editor**: https://kinesiscorporation.github.io/Adv360-Pro-GUI
 - **Support**: https://kinesis-ergo.com/support/kb360pro/
+## Keymap Viewer (HTML popup)
+`keymap-viewer/gen_keymap.py` (python3 stdlib only) renders the whole keymap as
+ONE self-contained HTML file, `keymap-viewer/keymap.html` (gitignored, no
+images or external assets). It parses `config/adv360.keymap` for layer include
+order, `config/layers/*.dtsi` for bindings, `config/macros.dtsi` for display
+names, and `config/info.json` for key geometry (thumb clusters are hand-placed
+in `THUMBS`, measured from `assets/key-positions.png`).
+
+- **Regenerate**: `make keymap` (also runs automatically in `make` / `make left`).
+- **Popup**: `bin/show_keymap.sh` toggles a chromeless Chrome `--app=` window
+  (hotkey `ctrl+alt+cmd+shift-k` in `~/.config/skhd/skhdrc`). The yabai rule
+  `adv360-keymap` in `~/.config/yabai/yabairc` floats and centers it. SIP is on,
+  so yabai has no scripting addition: scratchpad/sticky/sub-layer do nothing.
+  The hotkey is therefore focus/close, not show/hide: focused → close and
+  refocus the previous window; background → raise; none → regenerate + launch.
+  A `window_destroyed` signal (`adv360-keymap-closed`) restores focus when the
+  page is closed with Esc/q.
+- **In the page**: `1..N` jump to a layer, arrows/Space cycle, `Esc`/`q` close,
+  `#N` in the URL opens on layer N. Pressing a physical key lights it up.
+  Amber = the key that triggers the shown layer; blue = defined on this layer;
+  ghosted = transparent (falls through to base).
+- **New custom behavior?** Add a branch in `make_legend()` so it gets a legend.
+- **Superseded**: `kmviewer/` (Go TUI over PNGs) and `bin/generate_layer_images.sh`
+  (keymap-drawer SVGs) are the old approach and can be removed.
