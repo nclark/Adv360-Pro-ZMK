@@ -14,6 +14,12 @@
 #define THUMBS_LEFT  35 36 52 65 66 67   // Left thumb cluster
 #define THUMBS_RIGHT 37 38 53 68 69 70   // Right thumb cluster
 
+// Layer-tap tuning (used by &lt 1 BSPC on position 65): tap, then hold within
+// 175ms re-taps the key so Backspace still auto-repeats instead of holding the layer.
+&lt {
+    quick-tap-ms = <175>;
+};
+
 / {
     behaviors {
       #include "macros.dtsi"
