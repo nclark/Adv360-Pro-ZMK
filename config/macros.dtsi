@@ -78,6 +78,15 @@
     display-name = "Dictation";
   };
 
+  // Monitor KVM: switch input from Thunderbolt to DisplayPort (host shortcut).
+  kvm_dp: kvm_dp {
+    compatible = "zmk,behavior-macro";
+    label = "kvm_dp";
+    #binding-cells = <0>;
+    bindings = <&kp LC(LG(LS(LA(Z))))>;
+    display-name = "KVM DP";
+  };
+
   Win_Cut: Windows_Cut {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
