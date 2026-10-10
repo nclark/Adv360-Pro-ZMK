@@ -103,7 +103,9 @@ udiskie --automount --no-notify --no-tray &
 ```
 
 You can also open the drive in Nautilus and drag the file onto it; that goes through the
-same `udisks2` path.
+same `udisks2` path. Beware that a drag can **move** the file instead of copying it (it
+happened here), which leaves `firmware/` without the build you just flashed. Hold Ctrl while
+dragging to force a copy, or use the `cp` commands above.
 
 **Copy hangs, then errors.** The keyboard rebooted before the writeback finished. Check the
 version with Mod+V. If it is still the old build, redo the flash with the `&& sync` form.
