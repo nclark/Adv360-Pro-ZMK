@@ -1,0 +1,77 @@
+--- a/app/Kconfig	2026-10-10 15:29:08.829212644 -0600
++++ b/app/Kconfig	2026-10-10 15:32:50.500121622 -0600
+@@ -349,6 +349,11 @@
+     range 0x000000 0xFFFFFF
+     default 0xFFFFFF
+ 
++config ZMK_RGB_UNDERGLOW_LOW_BATTERY_THRESHOLD
++    int "Show the battery colour on the leftmost indicator LED while charge is at or below this percent (0 disables, 100 always)"
++    range 0 100
++    default 0
++
+ #ZMK_RGB_UNDERGLOW
+ endif
+ 
+--- a/app/src/rgb_underglow.c	2026-10-10 15:29:08.498220432 -0600
++++ b/app/src/rgb_underglow.c	2026-10-10 15:32:50.500038838 -0600
+@@ -276,6 +276,21 @@
+                                      : LED_RGB(0x000000);
+ }
+ 
++static struct led_rgb zmk_rgb_underglow_battery_color();
++
++// Low-battery warning: while this half's own charge is at or below the threshold,
++// its leftmost indicator LED shows the battery colour (same colours as Mod+Hotkey 4)
++// instead of its usual meaning. Each half reads its own fuel gauge. A reading of 0
++// means "no reading yet".
++static void zmk_rgb_underglow_low_battery_override(int pixel) {
++#if CONFIG_ZMK_RGB_UNDERGLOW_LOW_BATTERY_THRESHOLD > 0
++    uint8_t soc = zmk_battery_state_of_charge();
++    if (soc > 0 && soc <= CONFIG_ZMK_RGB_UNDERGLOW_LOW_BATTERY_THRESHOLD) {
++        pixels[pixel] = zmk_rgb_underglow_battery_color();
++    }
++#endif
++}
++
+ static void zmk_rgb_underglow_effect_kinesis() {
+ #if ZMK_BLE_IS_CENTRAL
+     // update state and propagate to peripheral if necessary
+@@ -312,6 +327,8 @@
+ 
+     // set third led to layer state
+     pixels[2] = LAYER_COLORS[layer_color_left];
++
++    zmk_rgb_underglow_low_battery_override(0);
+ #else
+     // leds for peripheral (right) side
+ 
+@@ -322,6 +339,8 @@
+     // set third led to layer state
+     pixels[0] = LAYER_COLORS[layer_color_right];
+ 
++    zmk_rgb_underglow_low_battery_override(2);
++
+ #if IS_ENABLED(CONFIG_ZMK_SPLIT_BLE)
+     bool bt_alert = false;
+     if (!zmk_split_bt_peripheral_is_bonded()) {
+@@ -402,14 +421,18 @@
+ static const struct led_rgb BATTERY_COLORS[NUM_BATTERY_LEVELS + 1] = {
+     LED_RGB(0x00FF00), LED_RGB(0xFFFF00), LED_RGB(0xFF8C00), LED_RGB(0xFF0000)};
+ 
+-static void zmk_rgb_underglow_effect_battery() {
++static struct led_rgb zmk_rgb_underglow_battery_color() {
+     uint8_t soc = zmk_battery_state_of_charge();
+ 
+     int color = 0;
+     for (; color < NUM_BATTERY_LEVELS && soc < BATTERY_LEVELS[color]; color++)
+         ;
+ 
+-    struct led_rgb rgb = BATTERY_COLORS[color];
++    return BATTERY_COLORS[color];
++}
++
++static void zmk_rgb_underglow_effect_battery() {
++    struct led_rgb rgb = zmk_rgb_underglow_battery_color();
+     for (int i = 0; i < STRIP_NUM_PIXELS; i++) {
+         pixels[i] = rgb;
+     }

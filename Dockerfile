@@ -11,6 +11,10 @@ RUN west update
 # West Zephyr export
 RUN west zephyr-export
 
+# Local patches to the Kinesis ZMK fork (see patches/README.md)
+COPY patches/ patches/
+RUN cd zmk && git apply --verbose ../patches/*.patch
+
 COPY bin/build.sh ./
 
 CMD ["./build.sh"]
