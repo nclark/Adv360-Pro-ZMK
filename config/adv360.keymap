@@ -100,13 +100,59 @@
           flavor = "tap-preferred";
           bindings = <&voiceink_hold>, <&voiceink_td>;
       };
+
+      // herdr layer, shifted workspace keys. herdr only accepts a plain Ctrl+B
+      // prefix, so with Shift held these mask the physical Shift (set on press,
+      // cleared on release) and send Ctrl+B then Shift+<key> from the macro.
+
+      hd_c: herdr_shift_c {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&herdr C>, <&herdr LS(C)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
+
+      hd_r: herdr_shift_r {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&herdr R>, <&herdr LS(R)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
+
+      hd_k: herdr_shift_k {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&herdr K>, <&herdr LS(K)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
+
+      hd_p: herdr_shift_p {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&herdr P>, <&herdr LS(P)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
+
+      hd_n: herdr_shift_n {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&herdr N>, <&herdr LS(N)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
+
+      hd_o: herdr_shift_o {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&none>, <&herdr LS(O)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
     };
 
   keymap {
     compatible = "zmk,keymap";
 
     #include "layers/default.dtsi"
-    #include "layers/navigation.dtsi"
+    #include "layers/herdr.dtsi"
     #include "layers/keypad.dtsi"
     #include "layers/function.dtsi"
     #include "layers/mod.dtsi"

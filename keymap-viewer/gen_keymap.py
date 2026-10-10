@@ -156,6 +156,20 @@ def keycode(kc):
     return kc.replace("_", " ").title()
 
 
+# herdr layer: prefix key -> action (see config/layers/herdr.dtsi)
+HERDR = {
+    "H": "pane ←", "J": "pane ↓", "K": "pane ↑", "L": "pane →",
+    "MINUS": "split ⇅", "V": "split ⇆", "X": "close pane", "Z": "zoom",
+    "SEMI": "last pane", "COMMA": "rename pane", "C": "new tab", "R": "rename tab",
+    "P": "prev tab", "N": "next tab", "D": "detach", "LBKT": "copy mode",
+    "QMARK": "help", "Q": "reload cfg",
+    **{f"N{i}": f"tab {i}" for i in range(1, 10)},
+}
+# hd_<key> mod-morphs: Shift held -> workspace action
+HERDR_SHIFT = {"C": "new ws", "R": "rename ws", "K": "close ws",
+               "P": "prev ws", "N": "next ws", "O": "annotate"}
+
+
 def make_legend(layer_names, macro_names):
     def lname(n):
         return layer_names[int(n)] if int(n) < len(layer_names) else f"L{n}"
@@ -181,6 +195,11 @@ def make_legend(layer_names, macro_names):
             return (keycode(args[1]), MODSYM.get(args[0], args[0]))
         if beh in ("shift_const_l", "shift_const_r"):
             return (lname(args[1]) + " word", MODSYM.get(args[0], args[0]))
+        if beh == "herdr":
+            return (HERDR.get(args[0], keycode(args[0])), "C-b " + keycode(args[0]).lower())
+        if beh.startswith("hd_"):
+            k = beh[3:].upper()
+            return (HERDR.get(k, ""), "⇧ " + HERDR_SHIFT[k])
         if beh == "voiceink_all":
             return ("Voice", "PTT · 2× Hist")
         if beh == "bt":
@@ -233,7 +252,7 @@ JSCODE = {
     "DEL": "Delete", "DELETE": "Delete", "GRAVE": "Backquote", "MINUS": "Minus",
     "EQUAL": "Equal", "LBKT": "BracketLeft", "RBKT": "BracketRight",
     "BSLH": "Backslash", "SEMI": "Semicolon", "SQT": "Quote", "COMMA": "Comma",
-    "DOT": "Period", "FSLH": "Slash", "LEFT": "ArrowLeft", "DOWN": "ArrowDown",
+    "DOT": "Period", "FSLH": "Slash", "QMARK": "Slash", "LEFT": "ArrowLeft", "DOWN": "ArrowDown",
     "UP": "ArrowUp", "RIGHT": "ArrowRight", "HOME": "Home", "END": "End",
     "PG_UP": "PageUp", "PG_DN": "PageDown", "CAPS": "CapsLock", "PSCRN": "PrintScreen",
     "LSHFT": "ShiftLeft", "RSHFT": "ShiftRight", "LCTRL": "ControlLeft",
@@ -257,6 +276,10 @@ def jscodes(b):
         kc = args[1]
     elif beh == "lt":
         kc = args[1]
+    elif beh == "herdr":
+        kc = args[0]
+    elif beh.startswith("hd_"):
+        kc = beh[3:].upper()
     elif beh in ("shift_const_l", "shift_const_r"):
         codes.append(JSCODE.get(args[0], ""))
     if kc:

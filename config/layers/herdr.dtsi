@@ -1,0 +1,18 @@
+// herdr prefix layer: hold the Ctrl+B thumb key (position 65) and press a key to
+// send Ctrl+B followed by that key. Keys sit where they are on the base layer, so
+// "prefix, h" is hold-thumb + H. Bindings mirror ~/.config/herdr/config.toml:
+//   h j k l   focus pane     -  split top/bottom   v  split side by side
+//   x close   z zoom   ; last pane   , rename pane   c new tab   r rename tab
+//   p / n prev / next tab   1-9 go to tab   d detach   [ copy mode   ? help   q reload
+//   with Shift held (hd_* mod-morphs in adv360.keymap, physical Shift masked):
+//   C new workspace   R rename ws   K close ws   P / N prev / next ws   O annotate
+herdr {
+  display-name = "herdr";
+  bindings = <
+    &trans &herdr N1 &herdr N2 &herdr N3 &herdr N4 &herdr N5 &trans                                                     &trans &herdr N6 &herdr N7 &herdr N8 &herdr N9 &trans &trans
+    &trans &herdr Q  &trans    &trans    &hd_r     &trans    &trans                                                     &trans &trans    &trans    &trans    &hd_o     &hd_p    &herdr MINUS
+    &trans &trans    &trans    &herdr D  &trans    &trans    &trans           &trans &trans &trans &trans        &trans &herdr H  &herdr J  &hd_k     &herdr L  &herdr SEMI &trans
+    &trans &herdr Z  &herdr X  &hd_c     &herdr V  &trans                             &trans &trans                     &hd_n    &trans    &herdr COMMA &trans &herdr QMARK &trans
+    &trans &trans    &trans    &trans    &trans                   &trans &trans &trans &trans &trans &trans              &trans   &trans    &herdr LBKT &trans &trans
+  >;
+};

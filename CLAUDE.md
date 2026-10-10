@@ -33,11 +33,14 @@ This file contains the definitive key position mappings for the Advantage 360 Pr
 
 ### Primary Keymap
 - **`config/adv360.keymap`**: Main keymap configuration
+  - Layers live in `config/layers/*.dtsi`, included in order:
   - Layer 0: Base (QWERTY)
-  - Layer 1: Keypad (numerical keypad mode)
-  - Layer 2: Function (F1-F12 keys)
-  - Layer 3: Mod (system controls, RGB, Bluetooth)
-  - Layers 4-7: Reserved for future use
+  - Layer 1: herdr (hold the Ctrl+B thumb key, position 65: sends Ctrl+B + key for herdr)
+  - Layer 2: Keypad (numerical keypad mode)
+  - Layer 3: Function (F1-F12 keys)
+  - Layer 4: Mod (system controls, RGB, Bluetooth)
+  - Layer 5: Const (shifted/constant word)
+  - Layers 6-9: Reserved for future use
   - Includes homerow mods behavior with 200ms tapping term
 
 ### Macro Definitions
