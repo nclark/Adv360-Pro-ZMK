@@ -25,8 +25,11 @@ On this keymap the stock Kinesis hotkeys still hold `&bootloader` on the Mod lay
 
 | Half | Keys | Positions |
 |---|---|---|
-| Left | hold Mod, tap left inner-column key below Kp (stock legend "hotkey 1") | Mod = 75, hotkey = 20 |
-| Right | hold Mod, tap right inner-column key below Mod (stock legend "hotkey 3") | Mod = 75, hotkey = 21 |
+| Left | hold Mod, tap left inner-column key below Kp (stock legend "hotkey 1") | Mod = 7, hotkey = 20 |
+| Right | hold Mod, tap right inner-column key below Mod (stock legend "hotkey 3") | Mod = 7, hotkey = 21 |
+
+Mod is the stock-capped key at position 7 (top of the right inner column, `&mo 4`). While
+held, the layer LEDs on both halves are red (layer 4).
 
 Fallback: double-click the physical bootloader button on the underside of the half with a
 paperclip. The timing is fiddly; it may take a couple of tries. The button locations are in
