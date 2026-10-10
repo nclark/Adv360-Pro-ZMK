@@ -146,6 +146,18 @@
           bindings = <&none>, <&herdr LS(O)>;
           mods = <(MOD_LSFT|MOD_RSFT)>;
       };
+      hd_g: herdr_shift_g {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&herdr G>, <&herdr LS(G)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
+      hd_tab: herdr_shift_tab {
+          compatible = "zmk,behavior-mod-morph";
+          #binding-cells = <0>;
+          bindings = <&herdr TAB>, <&herdr LS(TAB)>;
+          mods = <(MOD_LSFT|MOD_RSFT)>;
+      };
 
       // herdr layer, J: keep the home-row Shift on hold (same timing as hm_r) so
       // thumb + J held + C/R reaches the shifted workspace keys; tap = prefix + j.

@@ -162,12 +162,14 @@ HERDR = {
     "MINUS": "split ⇅", "V": "split ⇆", "X": "close pane", "Z": "zoom",
     "SEMI": "last pane", "COMMA": "rename pane", "C": "new tab", "R": "rename tab",
     "P": "prev tab", "N": "next tab", "D": "detach", "LBKT": "copy mode",
-    "QMARK": "help", "Q": "reload cfg",
+    "QMARK": "help", "Q": "reload cfg", "W": "ws picker", "G": "goto",
+    "E": "scrollback", "B": "sidebar", "TAB": "next pane",
     **{f"N{i}": f"tab {i}" for i in range(1, 10)},
 }
 # hd_<key> mod-morphs: Shift held -> workspace action
 HERDR_SHIFT = {"C": "new ws", "R": "rename ws", "K": "close ws",
-               "P": "prev ws", "N": "next ws", "O": "annotate"}
+               "P": "prev ws", "N": "next ws", "O": "annotate",
+               "G": "new worktree", "TAB": "prev pane"}
 
 
 def make_legend(layer_names, macro_names):
