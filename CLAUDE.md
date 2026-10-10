@@ -81,6 +81,8 @@ make clean     # Clean all build artifacts
 ## Flashing Process
 
 ### Standard Flashing
+**Linux**: follow `FLASHING-LINUX.md` (drive label `ADV360PRO`, automounted at `/run/media/$USER/ADV360PRO`; copy then `sync`). On this keymap the bootloader hotkeys are Mod (position 75) + position 20 (left) or 21 (right).
+
 1. **Left Half**: Connect USB, press `Mod+macro1` for bootloader mode
 2. Copy `left.uf2` to mounted drive
 3. **Right Half**: Connect USB, press `Mod+macro3` for bootloader mode
