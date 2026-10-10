@@ -6,12 +6,14 @@
 //   p / n prev / next tab   1-9 go to tab   d detach   [ copy mode   ? help   q reload
 //   with Shift held (hd_* mod-morphs in adv360.keymap, physical Shift masked):
 //   C new workspace   R rename ws   K close ws   P / N prev / next ws   O annotate
+// J keeps its home-row Shift on hold (hd_hm_j), so thumb + J held + C/R works for the
+// left-hand workspace keys; F (hm_l) only holds for right-hand keys like K.
 herdr {
   display-name = "herdr";
   bindings = <
     &trans &herdr N1 &herdr N2 &herdr N3 &herdr N4 &herdr N5 &trans                                                     &trans &herdr N6 &herdr N7 &herdr N8 &herdr N9 &trans &trans
     &trans &herdr Q  &trans    &trans    &hd_r     &trans    &trans                                                     &trans &trans    &trans    &trans    &hd_o     &hd_p    &herdr MINUS
-    &trans &trans    &trans    &herdr D  &trans    &trans    &trans           &trans &trans &trans &trans        &trans &herdr H  &herdr J  &hd_k     &herdr L  &herdr SEMI &trans
+    &trans &trans    &trans    &herdr D  &trans    &trans    &trans           &trans &trans &trans &trans        &trans &herdr H  &hd_hm_j RSHFT J &hd_k &herdr L  &herdr SEMI &trans
     &trans &herdr Z  &herdr X  &hd_c     &herdr V  &trans                             &trans &trans                     &hd_n    &trans    &herdr COMMA &trans &herdr QMARK &trans
     &trans &trans    &trans    &trans    &trans                   &trans &trans &trans &trans &trans &trans              &trans   &trans    &herdr LBKT &trans &trans
   >;

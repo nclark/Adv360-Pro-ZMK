@@ -197,6 +197,8 @@ def make_legend(layer_names, macro_names):
             return (lname(args[1]) + " word", MODSYM.get(args[0], args[0]))
         if beh == "herdr":
             return (HERDR.get(args[0], keycode(args[0])), "C-b " + keycode(args[0]).lower())
+        if beh == "hd_hm_j":
+            return (HERDR.get(args[1], keycode(args[1])), MODSYM.get(args[0], args[0]))
         if beh.startswith("hd_"):
             k = beh[3:].upper()
             return (HERDR.get(k, ""), "⇧ " + HERDR_SHIFT[k])
@@ -278,6 +280,9 @@ def jscodes(b):
         kc = args[1]
     elif beh == "herdr":
         kc = args[0]
+    elif beh == "hd_hm_j":
+        codes.append(JSCODE.get(args[0], ""))
+        kc = args[1]
     elif beh.startswith("hd_"):
         kc = beh[3:].upper()
     elif beh in ("shift_const_l", "shift_const_r"):
